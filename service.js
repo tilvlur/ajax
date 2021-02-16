@@ -12,7 +12,10 @@ function getImages(pageNumber) {
 }
 
 function createTask(title) {
-  return axios.post(`https://repetitora.net/api/JS/Tasks?widgetId=333223&title=${title}`)
+  return axios.post(`https://repetitora.net/api/JS/Tasks`, {
+    widgetId: 333223,
+    title: title,
+  })
       .then(resolvedValue => resolvedValue);
 }
 
