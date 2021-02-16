@@ -1,22 +1,42 @@
 'use strict';
 
-const resultBlock = document.querySelector('#result');
-const clickMeBtn = document.querySelector('#click-me');
-const pageNumber = document.querySelector('#inputNumber');
+const imagesBlock = document.querySelector('#result');
+const getImagesBtn = document.querySelector('#get-images');
+const pageNumber = document.querySelector('#input-number');
+const todoListTasks = document.querySelector('#tasks-result');
+const addTaskBtn = document.querySelector('#add-task-btn');
+const getTasksBtn = document.querySelector('#get-tasks');
 
-clickMeBtn.addEventListener('click', () => {
+
+getImagesBtn.addEventListener('click', () => {
   getImages(pageNumber.value)
-      .then(renderImages);
+      .then(onReceivedImages);
+});
+
+addTaskBtn.addEventListener('click', () => {
+  const taskTitle = document.getElementById('add-task').value
+  document.getElementById('add-task').value = '';
+  createTask(taskTitle)
+      .then((resolvedValue) => console.log(resolvedValue));
+
+})
+
+getTasksBtn.addEventListener('click', () => {
+  getTasks()
+      .then(onReceivedTasks);
 });
 
 //FUNCTIONS
 
-function renderImages(data) {
-  data.forEach(el => {
-    let img = document.createElement('img');
-    img.src = el.original;
+function onReceivedImages(images) {
+  images.forEach(image => {
+    const div = document.createElement('div');
+    div.className = 'img-wrapper';
+    const img = document.createElement('img');
+    img.src = image.original;
     img.alt = 'Image from AJAX-request';
-    resultBlock.append(img);
+    div.append(img);
+    imagesBlock.append(div);
   });
 
   /*for (let i = 0; i < data.length; i++) {
@@ -25,6 +45,16 @@ function renderImages(data) {
     img.alt = 'Image from AJAX-request';
     document.body.append(img);
   }*/
+}
+
+function onReceivedTasks(tasks) {
+  const ul = document.createElement('ul');
+  todoListTasks.append(ul);
+  tasks.forEach(task => {
+    const li = document.createElement('li');
+    li.innerHTML = task.title;
+    ul.append(li);
+  });
 }
 
 /*

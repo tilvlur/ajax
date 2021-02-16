@@ -3,13 +3,37 @@
 <head>
     <meta charset='UTF-8'>
     <title>AJAX</title>
+    <link rel='stylesheet' href='style.css'>
 </head>
 <body>
 
-<button id='click-me'>ClickMe</button>
-<label for='inputNumber'>Номер страницы: </label><input type='number' value='1' id='inputNumber'>
+<button id='get-images'>Get images</button>
+<label for='input-number'>Page#: </label>
+<input type='number' value='1' id='input-number'>
 <div id='result'></div>
-<img src='' alt=''>
+<div class='todo-list'>
+    <div>
+        <label for='add-task'>Add task:</label>
+    </div>
+    <div>
+        <textarea id='add-task'
+                  cols='15'
+                  rows='2'
+                  maxlength='30'
+                  placeholder='Add task here'
+                  style='resize: none;
+                  margin-bottom: 10px'>Default value</textarea>
+    </div>
+    <div>
+        <button id='add-task-btn'
+                style='margin-bottom: 10px'>Add task</button>
+    </div>
+    <div>
+        <button id='get-tasks'
+                style='margin-bottom: 10px'>Get tasks</button>
+    </div>
+    <div id='tasks-result'></div>
+</div>
 
 <!--<script src='https://code.jquery.com/jquery-2.2.4.js' integrity='sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI='
         crossorigin='anonymous'></script>-->
