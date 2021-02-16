@@ -5,8 +5,30 @@ const clickMeBtn = document.querySelector('#click-me');
 const pageNumber = document.querySelector('#inputNumber');
 
 clickMeBtn.addEventListener('click', () => {
-  getImages(pageNumber.value, renderImages);
+  getImages(pageNumber.value)
+      .then(renderImages);
 });
+
+//FUNCTIONS
+
+function renderImages(data) {
+  data.forEach(el => {
+    let img = document.createElement('img');
+    img.src = el.original;
+    img.alt = 'Image from AJAX-request';
+    resultBlock.append(img);
+  });
+
+  /*for (let i = 0; i < data.length; i++) {
+    let img = document.createElement('img');
+    img.src = data[i].original;
+    img.alt = 'Image from AJAX-request';
+    document.body.append(img);
+  }*/
+}
+
+/*
+//PROMISE
 
 doItAfter(2)
     .then((daneMessage) => setTimeout(() => console.log(`Hey-Hey ${daneMessage}`), 10))
@@ -24,7 +46,8 @@ promise.then((result) => console.log(result));
 //FUNCTIONS
 
 function doItAfter(seconds) {
-  return new Promise((resolve) => setTimeout(() => resolve('done'), seconds * 1000));
+  return new Promise(
+      (resolve) => setTimeout(() => resolve('done'), seconds * 1000));
 }
 
 function hardLoadProcess(loadLevel) {
@@ -34,21 +57,4 @@ function hardLoadProcess(loadLevel) {
     }
     resolve('well done');
   });
-
-}
-
-function renderImages(data) {
-  data.forEach(el => {
-    let img = document.createElement('img');
-    img.src = el.original;
-    img.alt = 'Image from AJAX-request';
-    resultBlock.append(img);
-  });
-
-  /*for (let i = 0; i < data.length; i++) {
-    let img = document.createElement('img');
-    img.src = data[i].original;
-    img.alt = 'Image from AJAX-request';
-    document.body.append(img);
-  }*/
-}
+}*/
