@@ -7,19 +7,17 @@ const todoListTasks = document.querySelector('#tasks-result');
 const addTaskBtn = document.querySelector('#add-task-btn');
 const getTasksBtn = document.querySelector('#get-tasks');
 
-
 getImagesBtn.addEventListener('click', () => {
   getImages(pageNumber.value)
       .then(onReceivedImages);
 });
 
 addTaskBtn.addEventListener('click', () => {
-  const taskTitle = document.getElementById('add-task').value
+  const taskTitle = document.getElementById('add-task').value;
   document.getElementById('add-task').value = '';
   createTask(taskTitle)
       .then((resolvedValue) => console.log(resolvedValue));
-
-})
+});
 
 getTasksBtn.addEventListener('click', () => {
   getTasks()
@@ -49,11 +47,34 @@ function onReceivedImages(images) {
 
 function onReceivedTasks(tasks) {
   const ul = document.createElement('ul');
+  todoListTasks.innerHTML = '';
   todoListTasks.append(ul);
   tasks.forEach(task => {
     const li = document.createElement('li');
-    li.innerHTML = task.title;
+    const textarea = document.createElement('textarea');
+    textarea.dataset.id = task.id;
+    textarea.value = task.title;
+    textarea.cols = 30;
+    textarea.rows = 1;
+    textarea.maxLength = 30;
+    li.append(textarea);
+
+    const updateBtn = document.createElement('button');
+    updateBtn.innerHTML = 'Update task';
+    li.append(updateBtn);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = 'Delete task';
+    li.append(deleteBtn);
     ul.append(li);
+
+    updateBtn.addEventListener('click', () => {
+      updateTask(textarea.dataset.id, textarea.value);
+    })
+
+   deleteBtn.addEventListener('click', () => {
+      deleteTask(textarea.dataset.id);
+      li.remove();
+    })
   });
 }
 

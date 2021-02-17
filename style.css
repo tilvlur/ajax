@@ -27,3 +27,24 @@ body {
     height: 100%;
     object-fit: cover;
 }
+
+.todo-list ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
+.todo-list ul>li {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
+.todo-list ul>li button {
+    margin: 5px 0;
+}
+
+.todo-list ul>li textarea {
+    resize: none;
+}
